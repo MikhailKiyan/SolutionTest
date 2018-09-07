@@ -1,0 +1,23 @@
+﻿@addTagHelper *, Kendo.Mvc
+
+<kendo-datasource name="dataSource1" type="DataSourceTagHelperType.Ajax" server-operation="false">
+    <transport>
+        <read url="@Url.Action("Products_Read", "DataSource")" />
+    </transport>
+</kendo-datasource>
+
+<kendo-grid name="grid" datasource-id="dataSource1">
+    <pageable enabled="true">
+    </pageable>
+    <columns>
+        <column field="ProductName"></column>
+        <column field="UnitPrice" format="{0:c}"></column>
+        <column field="UnitsInStock"></column>
+        <column field="Discontinued"></column>
+    </columns>
+    <scrollable enabled="true" />
+</kendo-grid>
+
+
+
+

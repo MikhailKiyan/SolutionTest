@@ -1,0 +1,85 @@
+@* Make sure tag helpers are not available for the Editor content *@
+@removeTagHelper "*, Microsoft.AspNet.Mvc.Razor"
+@removeTagHelper "*, Microsoft.AspNetCore.Mvc.Razor"
+
+@(Html.Kendo().Editor()
+      .Name("editor")
+      .HtmlAttributes(new { style = "height:240px" })
+      .Resizable(resizable => resizable.Content(false).Toolbar(true))
+      .Value(@<text>
+            <p>
+                <img src="@Url.Content("~/shared/web/editor/kendo-ui-web.png")" alt="Editor for ASP.NET Core logo" style="display:block;margin-left:auto;margin-right:auto;" />
+            </p>
+            <p>
+                Kendo UI Editor allows your users to edit HTML in a familiar, user-friendly way.<br />
+                In this version, the Editor provides the core HTML editing engine, which includes basic text formatting, hyperlinks, lists,
+                and image handling. The widget <strong>outputs identical HTML</strong> across all major browsers, follows
+                accessibility standards and provides API for content manipulation.
+            </p>
+      </text>)
+)
+
+<div class="box wide">
+    <h4>Keyboard legend</h4>
+    <ul class="keyboard-legend">
+        <li>
+            <span class="button-preview">
+                <span class="key-button">F10</span>
+            </span>
+            <span class="button-descr">
+                focuses toolbar
+            </span>
+        </li>
+        <li>
+            <span class="button-preview">
+                <span class="key-button">Tab</span>
+            </span>or
+            <span class="button-preview">
+                <span class="key-button">Right</span>
+            </span>
+            <span class="button-descr">
+                focuses next tool icon
+            </span>
+        </li>
+        <li>
+            <span class="button-preview">
+                <span class="key-button wide rightAlign">Shift</span>
+                +
+                <span class="key-button">Tab</span>
+            </span>or
+            <span class="button-preview">
+                <span class="key-button">Left</span>
+            </span>
+            <span class="button-descr">
+                focuses previous tool icon
+            </span>
+        </li>
+        <li>
+            <span class="button-preview">
+                <span class="key-button">Home</span>
+            </span>
+            <span class="button-descr">
+                focuses first tool
+            </span>
+        </li>
+        <li>
+            <span class="button-preview">
+                <span class="key-button">End</span>
+            </span>
+            <span class="button-descr">
+                focuses last tool
+            </span>
+        </li>
+        <li>
+            <span class="button-preview">
+                <span class="key-button">Enter</span>
+            </span>or
+            <span class="button-preview">
+                <span class="key-button">Space</span>
+            </span>
+            <span class="button-descr">
+                activates tool
+            </span>
+        </li>
+    </ul>
+</div>

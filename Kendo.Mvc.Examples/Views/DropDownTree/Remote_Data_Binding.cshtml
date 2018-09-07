@@ -1,0 +1,12 @@
+﻿<div class="demo-section k-content">
+    @(Html.Kendo().DropDownTree()
+                .Name("dropdowntree")
+                .DataTextField("Name")
+                .HtmlAttributes(new { style = "width: 100%" })
+                .DataSource(dataSource => dataSource
+                    .Read(read => read
+                        .Action("Remote_Data_Binding_Get_Employees", "DropDownTree")
+                    )
+                )
+    )
+</div>

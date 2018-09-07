@@ -1,0 +1,56 @@
+@addTagHelper *, Kendo.Mvc
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div class="demo-section k-content">
+    <h4>Using <code>items</code> tag helper collection</h4>
+    <kendo-treeview name="treeView1">
+        <items>
+            <treeview-item text="Web Site" expanded="true" sprite-css-class="folder">
+                <items>
+                    <treeview-item text="images" expanded="true" sprite-css-class="folder">
+                        <items>
+                            <treeview-item text="logo.png" sprite-css-class="image"></treeview-item>
+                        </items>
+                    </treeview-item>
+                    <treeview-item text="resources" expanded="true" sprite-css-class="folder">
+                        <items>
+                            <treeview-item text="pdf" expanded="true" sprite-css-class="folder">
+                                <items>
+                                    <treeview-item text="prices.pdf" sprite-css-class="pdf"></treeview-item>
+                                </items>
+                            </treeview-item>
+                        </items>
+                    </treeview-item>
+                    <treeview-item text="index.html" sprite-css-class="html"></treeview-item>
+                </items>
+            </treeview-item>
+        </items>
+    </kendo-treeview>
+</div>
+
+<div class="demo-section k-content">
+    <h4>Using <code>hierarchical-datasource</code> tag helpers</h4>
+    <kendo-treeview name="treeview2" datatextfield="FullName">
+        <hierarchical-datasource>
+            <transport>
+                <read url="https://demos.telerik.com/kendo-ui/service/Employees" datatype="jsonp" />
+            </transport>
+            <schema type="json">
+                <hierarchical-model id="EmployeeId" has-children="HasEmployees">
+                </hierarchical-model>
+            </schema>
+        </hierarchical-datasource>
+    </kendo-treeview>
+</div>
+
+<style>
+    #treeView1 .k-sprite {
+        background-image: url("@Url.Content("~/shared/web/treeview/coloricons-sprite.png")");
+    }
+
+    .rootfolder { background-position: 0 0; }
+    .folder { background-position: 0 -16px; }
+    .pdf { background-position: 0 -32px; }
+    .html { background-position: 0 -48px; }
+    .image { background-position: 0 -64px; }
+</style>

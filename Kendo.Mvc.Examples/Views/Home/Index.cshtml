@@ -1,0 +1,141 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@Html.Partial("WebSearchScript")
+<div id="layout-search-wrapper" class="search-wrapper">
+    <div class="search">
+        <input id="example-search" placeholder="Search demos" autofocus />
+    </div>
+</div>
+
+<div id="overview">
+    <div id="overview-widgets">
+        <h1>ASP.NET Core <strong>Components</strong></h1>
+        <div id="most-popular">
+            <div class="popular-widgets">
+                <h2>Most popular</h2>
+                <ul class="overview-col">
+                    <li><a href="@Url.Widget("grid")">Grid</a></li>
+                    <li><a href="@Url.Widget("editor")">Editor</a></li>
+                    <li><a href="@Url.Widget("scheduler")">Scheduler</a></li>
+                    <li><a href="@Url.Widget("bar-charts")">Bar Charts</a></li>
+                    <li><a href="@Url.Widget("line-charts")">Line Charts</a></li>
+                    <li><a href="@Url.Widget("financial")">Stock Charts</a></li>
+                    <li><a href="@Url.Widget("dropdownlist")">DropDownList</a></li>
+                    <li><a href="@Url.Widget("window")">Window</a></li>
+                    <li><a href="@Url.Widget("upload")">Upload</a></li>
+                    <li><a href="@Url.Widget("treeview")">TreeView</a></li>
+                </ul>
+            </div>
+            <div class="qr-code">
+
+                <h2>View on mobile device</h2>
+                <div id="mobileDemosQR"></div>
+
+                <script type="text/javascript">
+                    $(function() {
+                        $("#mobileDemosQR").kendoQRCode({
+                            value: window.location.href,
+                            size: 110,
+                            color: "#333333",
+                            border: {
+                                color: "#666666",
+                                width: 1
+                            }
+                        });
+                    });
+                </script>
+            </div>
+        </div>
+        <div id="widgets-all">
+
+            @{
+                var columns = new[] {
+                    new [] {
+                        "Data Management",
+                        "Editors"
+                    },
+                    new [] {
+                        "Conversational UI",
+                        "Charts",
+                        "Gauges"
+                    },
+                    new [] {
+                        "Barcodes",
+                        "Diagrams & Maps",
+                        "Scheduling",
+                        "Framework",
+                        "Media"
+                    },
+                    new [] {
+                        "Layout",
+                        "Navigation",
+                        "Interactivity & UX"
+                    }
+                };
+
+                var categories = (IEnumerable<IGrouping<string, NavigationWidget>>)ViewBag.WidgetCategories;
+            }
+
+            @{ int colNumber = 1; }
+
+            @foreach (var column in columns)
+            {
+                <ul class="overview-col col-four">
+                @foreach (var columnCategory in column)
+                {
+                    var category = categories.FirstOrDefault(c => c.Key == columnCategory);
+                    if (category.Any(c => c.ShouldInclude()))
+                    {
+                        <li class="widget">
+                            <h2>@category.Key</h2>
+                            <ul>
+                                @foreach (var widget in category)
+                                {
+                                    if (widget.ShouldInclude())
+                                    {
+                                        <li>@Html.WidgetLink(widget, (string)ViewBag.NavProduct)</li>
+                                    }
+                                }
+                            </ul>
+                        </li>
+                    }
+                }
+                </ul>
+
+                colNumber++;
+            }
+        </div>
+    </div>
+    <div id="applications-and-tools">
+        <div id="overview-themebuilder">
+            <h1>Theme Builder</h1>
+            <div class="theme-builder">
+                <a href="https://themebuilder.telerik.com/aspnet-core/">
+                    <img src="@Url.Content("~/shared/images/theme-builder.png")" alt="Kendo UI ThemeBuilder" />
+                    <p>Create new or customize SASS themes</p>
+                </a>
+            </div>
+        </div>
+        <div id="overview-applications">
+            <h1>Sample Applications</h1>
+            <ul>
+                <li class="application">
+                    <a href="http://demos.telerik.com/aspnet-core/bootstrap">
+                        <img src="@Url.Content("~/shared/images/applications/bootstrap.png")" alt="Kendo UI Bootstrap" class="application-image" />
+                        <p>Kendo UI<sup>&reg;</sup> ♥ Bootstrap</p>
+                    </a>
+                </li>
+                <li class="application">
+                    <a href="http://demos.telerik.com/aspnet-core/financial/stock-history">
+                        <img src="@Url.Content("~/shared/images/applications/stock-history.png")" alt="Stock History Dashboard" class="application-image" />
+                        <p>Stock History Dashboard</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    @Html.Partial("Footer")
+</div>

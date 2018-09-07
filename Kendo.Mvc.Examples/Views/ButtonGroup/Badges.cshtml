@@ -1,0 +1,19 @@
+﻿@using Kendo.Mvc.UI
+
+<div class="demo-section k-content">
+    @(Html.Kendo().ButtonGroup()
+       .Name("player")
+       .Items(t =>
+       {
+           t.Add().Text("One").Badge("3");
+           t.Add().Text("Two");
+           t.Add().Text("Three");
+       })
+    )
+</div>
+
+<style>
+    .demo-section {
+        text-align: center;
+    }
+</style>

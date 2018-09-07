@@ -1,0 +1,13 @@
+﻿@using Kendo.Mvc.UI
+
+<div class="demo-section k-rtl k-content">
+    @(Html.Kendo().ButtonGroup()
+       .Name("select-period")
+       .Items(t =>
+       {
+           t.Add().Text("Align Left").Icon("align-left");
+           t.Add().Text("Align Center").Icon("align-center");
+           t.Add().Text("Align Right").Icon("align-right");
+       })
+    )
+</div>

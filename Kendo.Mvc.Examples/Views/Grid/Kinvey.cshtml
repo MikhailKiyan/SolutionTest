@@ -1,0 +1,52 @@
+<!--[if gte IE 9]>-->
+<script src="~/shared/kinvey-html5-sdk.min.js"></script>
+<script src="~/shared/kendo.data.kinvey.min.js"></script>
+
+
+@(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.Product>()
+        .Name("grid")
+        .Columns(columns =>
+        {
+            columns.Bound(o => o.ProductName);
+            columns.Bound(o => o.UnitPrice).Width(220);
+            columns.Bound(o => o.UnitsInStock).Width(220);
+            columns.Bound(o => o.Discontinued).Width(220);
+        })
+        .HtmlAttributes(new { style = "height: 550px;" })
+        .Pageable()
+        .Sortable()
+        .Scrollable()
+        .DataSource(dataSource => dataSource
+           .Custom()
+           .ServerSorting(true)
+           .ServerPaging(true)
+           .PageSize(20)
+           .Type("kinvey")
+           .Transport(new { typeName = "products" })
+        )
+        .Deferred()
+)
+<br />
+<!--<![endif]-->
+
+<script>
+    Kinvey.init({
+        appKey: 'kid_SJyRpx96G',
+        appSecret: 'a88466f87e434ca4a1a0194e33d3168d'
+    });
+
+    //Kinvey backend services require to have a logged user in order to perform CRUD operations.
+    if (!Kinvey.User.getActiveUser()) {
+        Kinvey.User.signup()
+            .then(function () {
+                createGrid();
+            });
+    } else {
+        createGrid();
+    }
+
+    function createGrid() {
+        //The initialization of the grid and specifically reading its data should be done after succesfull log-in of the user.
+        @Html.Kendo().DeferredScripts(false)
+    }
+</script>
